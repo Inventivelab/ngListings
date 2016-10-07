@@ -1,14 +1,64 @@
 <!DOCTYPE html>
-<html>
+<html ng-app="ngListings">
   <head>
     <meta charset="utf-8">
     <title>ngListings</title>
+    <link rel="stylesheet" href="node_modules/angular-material/angular-material.css">
+    <link href="node_modules/mdi/css/materialdesignicons.min.css" media="all" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="css/style.css">
+
   </head>
-  <body ng-app="ngListings">
+  <body ng-controller="listingsController">
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <p><strong>Listings</strong></p>
+        <md-button>
+          <md-icon class="mdi mdi-plus-circle"></md-icon>
+          Add Listing
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-content class="md-padding" layout="row" layout-wrap>
+      <md-card ng-repeat="listing in listings" flex='30'>
+        <img ng-src="{{listing.image}}" alt="">
+        <md-card-content>
+          <div class="listing-info" ng-show="!showInfo">
+            <h2 class="md-title">{{listing.title}}</h2>
+            <h2>{{listing.posted | date: "longDate"}}</h2>
+            <h3>{{listing.price | currency }}</h3>
+            <p>{{listing.description}}.</p>
+          </div>
+          <div class="listing-contact" ng-show="showInfo">
+            <p><md-icon class="mdi mdi-account"></md-icon>{{listing.contact.name}}</p>
+            <p><md-icon class="mdi mdi-phone"></md-icon>{{listing.contact.phone}}</p>
+            <p><md-icon class="mdi mdi-email"></md-icon>{{listing.contact.email}}</p>
+          </div>
+
+          <div layout="row">
+            <md-button ng-click="showInfo = true" ng-show="!showInfo">Contact</md-button>
+            <md-button ng-click="showInfo = false" ng-show="showInfo">Details</md-button>
+            <md-button ng-click="showAdmin = true" ng-show="!showAdmin">Admin</md-button>
+            <md-button ng-click="showAdmin = false" ng-show="showAdmin">Close</md-button>
+          </div>
+
+          <div class="listing-admin" ng-if="showAdmin">
+            <h3>Admin</h3>
+            <div layout="row">
+              <md-button class="md-primary">Edit</md-button>
+              <md-button class="md-warn">Delete</md-button>
+            </div>
+          </div>
+        </md-card-content>
+      </md-card>
+    </md-content>
     <script src="node_modules/angular/angular.js"></script>
+    <script src="node_modules/angular-material/angular-material.js"></script>
+    <script src="node_modules/angular-animate/angular-animate.js"></script>
+    <script src="node_modules/angular-aria/angular-aria.js"></script>
+
     <script src="scripts/app.js"></script>
+    <script src="components/listingsCtr.js"></script>
+    <script src="components/listingsFactory.js"></script>
   </body>
-    <div ng-init="message = 'Hello World'">
-      <h1>{{message}}</h1>
-    </div>
 </html>
