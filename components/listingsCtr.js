@@ -2,7 +2,7 @@
   "use strict";
   angular
     .module("ngListings")
-    .controller("listingsController", function($scope, listingsFactory, $mdSidenav, $mdToast){
+    .controller("listingsController", function($scope, listingsFactory, $mdSidenav, $mdToast, $mdDialog){
       listingsFactory.getListings().then(function(listings){
         $scope.listings = listings.data;
       });
@@ -42,6 +42,19 @@
         $scope.listing = {};
         $scope.closeSidebar();
         showToast("Successfully edited your listing");
+      }
+
+      $scope.deleteListing = function(listing){
+        var confirm = $mdDialog.confirm()
+          .title('Are you sure you want to delete ' + listing.title + "?")
+          .ok('Delete')
+          .cancel("Go Back")
+          .targetEvent(event);
+        $mdDialog.show(confirm).then(function(){
+          var index = $scope.listings.indexOf(listing);
+          $scope.listings.splice(index, 1);
+        })
+        
       }
 
       function showToast(message){
