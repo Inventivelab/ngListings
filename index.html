@@ -16,9 +16,28 @@
           <md-icon class="mdi mdi-plus-circle"></md-icon>
           Add Listing
         </md-button>
+
+         <md-button ng-click="showFilter = true">
+          <md-icon class="mdi mdi-magnify"></md-icon>
+          Search
+        </md-button>
       </div>
     </md-toolbar>
-
+    <div class="filters" layout="row" layout-align="center center" ng-show="showFilter">
+      <md-input-container class='input-text'>
+        <label>Enter Search Term</label>
+        <input ng-model="listingsFilter" type="text">
+      </md-input-container>
+      <md-input-container>
+        <label>Type</label>
+        <md-select ng-model="propertyType">
+          <md-option ng-repeat="propertyType in propertyTypes" value="{{propertyType}}">{{propertyType}}</md-option>
+        </md-select>
+      </md-input-container>
+      <md-input-container>
+        <md-button class="md-warn" ng-click="listingsFilter=''; propertyType=''">Clear</md-button>
+      </md-input-container>
+    </div>
     <md-sidenav class="md-sidenav-left md-whiteframe-z2" 
       md-component-id="left">
       <md-toolbar>
@@ -68,7 +87,11 @@
     </md-sidenav> 
 
     <md-content class="md-padding" layout="row" layout-wrap>
-      <md-card ng-repeat="listing in listings" flex='30'>
+      <md-card ng-repeat="listing in listings | 
+                          filter: listingsFilter | 
+                          filter: propertyType"  
+                          flex='30'
+                          class="listing">
         <img ng-src="{{listing.image}}" alt="">
         <md-card-content>
           <div class="listing-info" ng-show="!showInfo">
@@ -108,5 +131,6 @@
     <script src="scripts/app.js"></script>
     <script src="components/listingsCtr.js"></script>
     <script src="components/listingsFactory.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.4/lodash.min.js"></script>
   </body>
 </html>

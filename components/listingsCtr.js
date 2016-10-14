@@ -5,6 +5,8 @@
     .controller("listingsController", function($scope, listingsFactory, $mdSidenav, $mdToast, $mdDialog){
       listingsFactory.getListings().then(function(listings){
         $scope.listings = listings.data;
+        $scope.propertyTypes = getPropertyTypes($scope.listings);
+
       });
 
       var contact = {
@@ -44,7 +46,7 @@
         showToast("Successfully edited your listing");
       }
 
-      $scope.deleteListing = function(listing){
+      $scope.deleteListing = function(event, listing){
         var confirm = $mdDialog.confirm()
           .title('Are you sure you want to delete ' + listing.title + "?")
           .ok('Delete')
@@ -64,6 +66,16 @@
             .position('top, right')
             .hideDelay(3000)
           )
+      }
+
+      function getPropertyTypes(listings){
+        var propertyTypes = [];
+        angular.forEach(listings, function(property){
+          angular.forEach(property.propertyTypes, function(propertyType){
+            propertyTypes.push(propertyType);
+          });
+        });
+        return _.uniq(propertyTypes);
       }
       
     });

@@ -10,7 +10,7 @@
       "phone":"(234) 555-5555",
       "email":"saks@gmail.com"
     },
-    "categories":[
+    "propertyTypes":[
       "Condo",
       "Warehouse"
     ],
@@ -28,7 +28,7 @@
       "phone": "(234) 555-9999",
       "email": "sam@gmail.com"
     },
-    "categories": [
+    "propertyTypes": [
       "Single Home"
     ],
     "image":"https://www.naijaproperty.com/files/pictures/picture_1416.jpg",
@@ -45,7 +45,7 @@
       "phone":"(234) 555-5445",
       "email":"manuel@gmail.com"
     },
-    "categories":[
+    "propertyTypes":[
       "Condo"
     ],
     "image":"https://www.naijaproperty.com/files/pictures/picture_1448.jpg",
@@ -62,7 +62,7 @@
       "phone":"(234) 445-5555",
       "email":"teri@gmail.com"
     },
-    "categories":[
+    "propertyTypes":[
       "Real Estate"
     ],
     "image":"https://www.naijaproperty.com/files/pictures/picture_1655.jpg",
@@ -79,7 +79,7 @@
       "phone":"(234) 555-4567",
       "email":"ball@gmail.com"
     },
-    "categories":[
+    "propertyTypes":[
       "Apartments",
       "Mini-Flat"
     ],
@@ -97,7 +97,7 @@
       "phone":"(234) 333-7777",
       "email":"duro@yahoo.com"
     },
-    "categories":[
+    "propertyTypes":[
       "Real Estate",
       "Apartments"
     ],
