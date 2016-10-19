@@ -2,7 +2,7 @@
   "use strict";
   angular
     .module("ngListings")
-    .controller("listingsController", function($scope, $state, listingsFactory, $mdSidenav, $mdToast, $mdDialog){
+    .controller("listingsController", function($scope, listingsFactory, $mdSidenav, $mdToast, $mdDialog){
 
       var vm = this;
 
@@ -23,17 +23,6 @@
 
       });
 
-      $scope.$on('newListing', function(event, listing){
-        listing.id = vm.listings.length + 1;
-        vm.listings.push(listing);
-        showToast('Listing saved');
-
-      });
-
-      $scope.$on('editSaved', function(event, message){
-        showToast(message);
-      })
-
       var contact = {
         name: "Said Maadan",
         email: "said@maadan.com",
@@ -41,7 +30,7 @@
       }
 
       function openSidebar(){
-        $state.go('listings.new')
+        $mdSidenav('left').open();
       }
 
       function closeSidebar(){
@@ -59,13 +48,9 @@
       }
 
       function editListing(listing){
-        $state.go('listings.edit', {
-          id: listing.id,
-          listing: listing
-        });
-        // vm.editing = true;
-        // openSidebar();
-        // vm.listing = listing;
+        vm.editing = true;
+        openSidebar();
+        vm.listing = listing;
       }
 
       function saveEdit(){

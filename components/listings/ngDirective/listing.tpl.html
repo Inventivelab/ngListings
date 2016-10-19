@@ -1,0 +1,35 @@
+<md-card ng-repeat="listing in vm.listings | 
+                          filter: listingsFilter | 
+                          filter: propertyType"  
+                          flex='30'
+                          class="listing">
+        <img ng-src="{{listing.image}}" alt="">
+        <md-card-content>
+          <div class="listing-info" ng-show="!showInfo">
+            <h2 class="md-title">{{listing.title}}</h2>
+            <h2>{{listing.posted | date: "longDate"}}</h2>
+            <h3>{{listing.price | currency }}</h3>
+            <p>{{listing.description}}.</p>
+          </div>
+          <div class="listing-contact" ng-show="showInfo">
+            <p><md-icon class="mdi mdi-account"></md-icon>{{listing.contact.name}}</p>
+            <p><md-icon class="mdi mdi-phone"></md-icon>{{listing.contact.phone}}</p>
+            <p><md-icon class="mdi mdi-email"></md-icon>{{listing.contact.email}}</p>
+          </div>
+
+          <div layout="row">
+            <md-button ng-click="showInfo = true" ng-show="!showInfo">Contact</md-button>
+            <md-button ng-click="showInfo = false" ng-show="showInfo">Details</md-button>
+            <md-button ng-click="showAdmin = true" ng-show="!showAdmin">Admin</md-button>
+            <md-button ng-click="showAdmin = false" ng-show="showAdmin">Close</md-button>
+          </div>
+
+          <div class="listing-admin" ng-if="showAdmin">
+            <h3>Admin</h3>
+            <div layout="row">
+              <md-button ng-click="vm.editListing(listing)" class="md-primary">Edit</md-button>
+              <md-button ng-click="vm.deleteListing($event, listing)" class="md-warn">Delete</md-button>
+            </div>
+          </div>
+        </md-card-content>
+      </md-card>

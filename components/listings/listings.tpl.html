@@ -1,0 +1,38 @@
+<md-toolbar>
+      <div class="md-toolbar-tools">
+        <p><strong>Listings</strong></p>
+        <md-button ng-click="vm.openSidebar()">
+          <md-icon class="mdi mdi-plus-circle"></md-icon>
+          Add Listing
+        </md-button>
+
+         <md-button ng-click="showFilter = true">
+          <md-icon class="mdi mdi-magnify"></md-icon>
+          Search
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <div class="filters" layout="row" layout-align="center center" ng-show="showFilter">
+      <md-input-container class='input-text'>
+        <label>Enter Search Term</label>
+        <input ng-model="listingsFilter" type="text">
+      </md-input-container>
+      <md-input-container>
+        <label>Type</label>
+        <md-select ng-model="propertyType">
+          <md-option ng-repeat="propertyType in vm.propertyTypes" value="{{propertyType}}">{{propertyType}}</md-option>
+        </md-select>
+      </md-input-container>
+      <md-input-container>
+        <md-button class="md-warn" ng-click="listingsFilter=''; propertyType=''">Clear</md-button>
+      </md-input-container>
+    </div>
+    
+    <ui-view></ui-view>
+    
+    <md-content>
+      <listing-directive class="md-padding" layout="row" layout-wrap>
+        
+      </listing-directive>
+    </md-content>

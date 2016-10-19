@@ -8,129 +8,19 @@
     <link rel="stylesheet" href="css/style.css">
 
   </head>
-  <body ng-controller="listingsController">
-    <md-toolbar>
-      <div class="md-toolbar-tools">
-        <p><strong>Listings</strong></p>
-        <md-button ng-click="openSidebar()">
-          <md-icon class="mdi mdi-plus-circle"></md-icon>
-          Add Listing
-        </md-button>
-
-         <md-button ng-click="showFilter = true">
-          <md-icon class="mdi mdi-magnify"></md-icon>
-          Search
-        </md-button>
-      </div>
-    </md-toolbar>
-    <div class="filters" layout="row" layout-align="center center" ng-show="showFilter">
-      <md-input-container class='input-text'>
-        <label>Enter Search Term</label>
-        <input ng-model="listingsFilter" type="text">
-      </md-input-container>
-      <md-input-container>
-        <label>Type</label>
-        <md-select ng-model="propertyType">
-          <md-option ng-repeat="propertyType in propertyTypes" value="{{propertyType}}">{{propertyType}}</md-option>
-        </md-select>
-      </md-input-container>
-      <md-input-container>
-        <md-button class="md-warn" ng-click="listingsFilter=''; propertyType=''">Clear</md-button>
-      </md-input-container>
-    </div>
-    <md-sidenav class="md-sidenav-left md-whiteframe-z2" 
-      md-component-id="left">
-      <md-toolbar>
-        <h1 class="md-toolbar-tools">Add Listings</h1>
-      </md-toolbar>
-
-      <md-content layout-padding>
-        <form>
-          <md-input-container>
-            <label for="title">Title</label>
-            <input type="text" id="title"
-                    ng-model="listing.title"
-                    md-autofocus>
-          </md-input-container>
-          <md-input-container>
-            <label for="price">Price</label>
-            <input type="text" id="price"
-                ng-model="listing.price"
-                 >
-          </md-input-container>
-          <md-input-container>
-            <label for="description">Description</label>
-            <textarea type="text" id="description"
-                ng-model="listing.description"
-                  >
-            </textarea>
-          </md-input-container>
-          <md-input-container>
-            <label for="image">Image Link</label>
-            <input type="text" id="image"
-                ng-model="listing.image"
-                  >
-          </md-input-container>
-          <md-button ng-if="!editing" class="md-primary" ng-click="saveListing(listing)">
-            Save
-          </md-button>
-          <md-button ng-click="saveEdit()" ng-if="editing" class="md-primary">
-            Save Edit
-          </md-button>
-          <md-button ng-click="closeSidebar()" class="md-warn">
-            Cancel
-          </md-button>
-          <!-- <pre>{{listing | json}}</pre> -->
-        </form>
-      </md-content>
-
-    </md-sidenav> 
-
-    <md-content class="md-padding" layout="row" layout-wrap>
-      <md-card ng-repeat="listing in listings | 
-                          filter: listingsFilter | 
-                          filter: propertyType"  
-                          flex='30'
-                          class="listing">
-        <img ng-src="{{listing.image}}" alt="">
-        <md-card-content>
-          <div class="listing-info" ng-show="!showInfo">
-            <h2 class="md-title">{{listing.title}}</h2>
-            <h2>{{listing.posted | date: "longDate"}}</h2>
-            <h3>{{listing.price | currency }}</h3>
-            <p>{{listing.description}}.</p>
-          </div>
-          <div class="listing-contact" ng-show="showInfo">
-            <p><md-icon class="mdi mdi-account"></md-icon>{{listing.contact.name}}</p>
-            <p><md-icon class="mdi mdi-phone"></md-icon>{{listing.contact.phone}}</p>
-            <p><md-icon class="mdi mdi-email"></md-icon>{{listing.contact.email}}</p>
-          </div>
-
-          <div layout="row">
-            <md-button ng-click="showInfo = true" ng-show="!showInfo">Contact</md-button>
-            <md-button ng-click="showInfo = false" ng-show="showInfo">Details</md-button>
-            <md-button ng-click="showAdmin = true" ng-show="!showAdmin">Admin</md-button>
-            <md-button ng-click="showAdmin = false" ng-show="showAdmin">Close</md-button>
-          </div>
-
-          <div class="listing-admin" ng-if="showAdmin">
-            <h3>Admin</h3>
-            <div layout="row">
-              <md-button ng-click="editListing(listing)" class="md-primary">Edit</md-button>
-              <md-button ng-click="deleteListing($event, listing)" class="md-warn">Delete</md-button>
-            </div>
-          </div>
-        </md-card-content>
-      </md-card>
-    </md-content>
+  <body>
+    <ui-view></ui-view>
     <script src="node_modules/angular/angular.js"></script>
     <script src="node_modules/angular-material/angular-material.js"></script>
     <script src="node_modules/angular-animate/angular-animate.js"></script>
     <script src="node_modules/angular-aria/angular-aria.js"></script>
 
     <script src="scripts/app.js"></script>
-    <script src="components/listingsCtr.js"></script>
-    <script src="components/listingsFactory.js"></script>
+    <script src="components/listings/listingsCtr.js"></script>
+    <script src="components/listings/listingsFactory.js"></script>
+    <script src="components/listings/new/listings.new.js"></script>
+    <script src="components/listings/edit/listings.edit.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.16.4/lodash.min.js"></script>
+    <script src="node_modules/angular-ui-router/release/angular-ui-router.js"></script>
   </body>
 </html>
