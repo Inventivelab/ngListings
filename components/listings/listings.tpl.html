@@ -32,7 +32,13 @@
     <ui-view></ui-view>
     
     <md-content>
-      <listing-directive class="md-padding" layout="row" layout-wrap>
+      <listings-directive 
+        listings="vm.listings",
+        listingsFilter="listingsFilter",
+        propertyType="propertyType" 
+        class="md-padding" 
+        layout="row" 
+        layout-wrap>
         
-      </listing-directive>
+      </listings-directive>
     </md-content>

@@ -1,3 +1,17 @@
+md-card img {
+  width: 100%;
+  height: auto;
+  min-height: 0px;
+}
+
+md-icon {
+  height: auto;
+}
+
+.filters md-input-container {
+  margin-right: 10px;
+}
+
 button .material-icons{
   margin-top: -13px;
 }

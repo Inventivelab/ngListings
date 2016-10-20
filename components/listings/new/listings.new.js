@@ -4,15 +4,13 @@
 
   angular
     .module('ngListings')
-    .controller('newListingsController', function($scope, $state, $mdSidenav, $timeout, $mdDialog, listingsFactory){
+    .controller('newListingsController', function($state, $scope, $mdSidenav, $timeout, $mdDialog, listingsFactory){
 
       var vm = this;
       vm.closeSidebar = closeSidebar;
       vm.saveListing = saveListing;
 
-      $timeout(function() {
-        $mdSidenav('left').open();     
-      });
+      vm.sidebarTitle = 'Add Listing';
 
       $scope.$watch('vm.sidenavOpen', function(sidenav){
         if(sidenav === false){
@@ -22,7 +20,12 @@
         }
       });
 
+      $timeout(function() {
+        $mdSidenav('left').open();     
+      });
+
       function closeSidebar(){
+        vm.listing = {};
         vm.sidenavOpen = false;
       }
 

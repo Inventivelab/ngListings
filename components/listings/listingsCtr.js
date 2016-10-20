@@ -2,7 +2,7 @@
   "use strict";
   angular
     .module("ngListings")
-    .controller("listingsController", function($scope, listingsFactory, $mdSidenav, $mdToast, $mdDialog){
+    .controller("listingsController", function($scope, $state, $http, listingsFactory, $mdSidenav, $mdToast, $mdDialog){
 
       var vm = this;
 
@@ -16,12 +16,30 @@
       vm.propertyTypes;
       vm.saveListing = saveListing;
       
+      // vm.listings = listingsFactory.ref;
+      // vm.listings.$loaded().then(function(listings){
+      //   vm.propertyTypes = getPropertyTypes(listings);
+      // });
 
       listingsFactory.getListings().then(function(listings){
         vm.listings = listings.data;
         vm.propertyTypes = getPropertyTypes(vm.listings);
 
       });
+
+      $scope.$on('newListing', function(event, data) {
+        data.id = vm.listings.length + 1;
+        vm.listings.push(data);
+        showToast('Listing Saved');
+      });
+
+      $scope.$on('editSaved', function(event, message) {
+        showToast(message);
+      });
+
+      vm.sidebarTitle;
+      
+      
 
       var contact = {
         name: "Said Maadan",

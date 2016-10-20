@@ -4,12 +4,15 @@
 
   angular
     .module('ngListings')
-    .controller('editListingsController', function($scope, $state, $mdSidenav, $timeout, $mdDialog, listingsFactory){
+    .controller('editListingsController', function($state, $scope, $mdSidenav, $timeout, $mdDialog, listingsFactory){
 
       var vm = this;
       vm.closeSidebar = closeSidebar;
       vm.saveEdit = saveEdit;
       vm.listing = $state.params.listing;
+
+      vm.sidebarTitle = 'Edit listing';
+
 
       $timeout(function() {
         $mdSidenav('left').open();     
